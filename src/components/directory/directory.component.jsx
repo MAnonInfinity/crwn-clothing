@@ -1,5 +1,5 @@
 import React from 'react';
-import './directory.component.scss'
+import './directory.style.scss'
 
 import MenuItem from '../menu-item/menu-item.component';
 
@@ -47,7 +47,7 @@ export class Directory extends React.Component {
 
     render() {
         return (
-            //  ...othersectionProps is a shortcut way of passing in props to the child
+            //  `...othersectionProps` is a shortcut way of passing in props to the child
             <div className='directory-menu'>
                 {this.state.sections.map(({ id, ...otherSectionProps }) => ( 
                     <MenuItem 
