@@ -14,15 +14,17 @@ export class SignIn extends React.Component {
         this.state = {
             email: '',
             password: ''
-        }
+        };
     }
 
     handleChange = (event) => {
-        const { email, password } = event.target;
-        this.setState({ email: email, password:  password })
+        const { value, name } = event.target;
+        console.log(event.target);
+        this.setState({ [name]: value });
     }
 
     handleSubmit = (event) => {
+        event.preventDefault();
         this.setState({ email: '', password: '' });
     }
 
@@ -30,7 +32,7 @@ export class SignIn extends React.Component {
         return (
             <div className='sign-in'> 
                 <h2>I already have an account</h2>
-                <span>Sign in with your email and password</span>
+                <span>Sign In with your email and password</span>
 
                 <form onSubmit={this.handleSubmit}>
                     <FormInput 
@@ -52,6 +54,7 @@ export class SignIn extends React.Component {
 
                     <div className='buttons'>
                         <CustomButton type='submit'>Sign In</CustomButton>
+
                         <CustomButton 
                             onClick={signInWithGoogle}
                             isGoogleSignIn  // this value gets passed as true
