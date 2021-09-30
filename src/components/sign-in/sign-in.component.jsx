@@ -63,6 +63,7 @@ export class SignIn extends React.Component {
                         <CustomButton type='submit'>Sign In</CustomButton>
 
                         <CustomButton 
+                            type='button'
                             onClick={signInWithGoogle}
                             isGoogleSignIn  // this value gets passed as true
                         >
