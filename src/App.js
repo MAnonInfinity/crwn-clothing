@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './App.css';
@@ -11,7 +11,7 @@ import Header from './components/header/header.component.jsx'
 
 import { setCurrentUser } from './redux/user/user.actions';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument, signInWithGoogle } from './firebase/firebase.utils';
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -50,16 +50,36 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/' component={HomePage}/>
             <Route path='/shop' component={ShopPage}/>
-            <Route path='/signin'>{SignInAndSignUpPage}</Route>
+            <Route 
+              exact 
+              path='/signin' 
+              render={
+                () => this.props.currentUser ? 
+                  (<Redirect to='/' />) 
+                  : 
+                  (<SignInAndSignUpPage />)
+              }/>
           </Switch>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(App);  // the first argument of the first fxn of connect is `mapStateToProps` 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
+// export default connect(
+//   null, 
+//   mapDispatchToProps
+// )(App);  // the first argument of the first fxn of connect is `mapStateToProps` 
 // & the second is `mapDispatchToProps`, in this case we don't need to mapStateToProps hence, we're passing null
