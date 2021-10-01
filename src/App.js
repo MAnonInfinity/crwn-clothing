@@ -11,7 +11,7 @@ import Header from './components/header/header.component.jsx'
 
 import { setCurrentUser } from './redux/user/user.actions';
 
-import { auth, createUserProfileDocument, signInWithGoogle } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
